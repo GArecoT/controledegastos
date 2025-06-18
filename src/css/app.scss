@@ -1,1 +1,16 @@
+@import './quasar.variables.scss';
 // app global css in SCSS form
+@font-face {
+  font-family: lexend;
+  src: url(./fonts/Lexend-VariableFont_wght.ttf);
+}
+.font-lexend {
+  font-family: 'lexend';
+}
+.bg-light{
+  background-color: $light
+}
+.bg-light-gray{
+  background-color: $light-gray
+}
+
