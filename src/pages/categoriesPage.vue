@@ -1,5 +1,5 @@
 <template>
-  <pageComponent>categorias</pageComponent>
+  <pageComponent titulo="Categorias">categorias</pageComponent>
 </template>
 <script setup>
 import pageComponent from "src/components/pageComponent.vue";

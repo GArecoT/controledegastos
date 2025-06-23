@@ -5,7 +5,9 @@
     class="items-center content-center"
     :class="props.dark ? 'bg-dark-gray' : 'bg-light-gray'"
     :style="`color: ${props.corDestaque}; ${
-      props.vertical ? 'height: calc(100vh - 50px)' : ''
+      props.vertical
+        ? 'height: calc(100vh - 50px); border-radius: 0px 5px 5px 0px'
+        : ' border-radius: 5px 0px 0px 5px'
     }`"
     :indicator-color="props.dark ? 'dark' : 'light'"
   >
@@ -13,7 +15,7 @@
       :name="tab.name"
       v-for="tab in tabs"
       :key="tab"
-        @click="router.push({ name: tab.name })"
+      @click="router.push({ name: tab.name })"
       no-caps
       ><q-icon
         :name="tab.icon"
@@ -36,7 +38,7 @@
 import { ref, watch } from "vue";
 import { useRouter } from "vue-router";
 
-const router = useRouter()
+const router = useRouter();
 
 const props = defineProps({
   vertical: {

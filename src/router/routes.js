@@ -15,6 +15,18 @@ const routes = [
       },
     ],
   },
+  {
+    path: "/settings",
+    name: "settings",
+    component: () => import("layouts/settingsLayout.vue"),
+    children: [
+      {
+        path: "",
+        name: "settingsHome",
+        component: () => import("pages/IndexPage.vue"),
+      },
+    ],
+  },
 
   // Always leave this as last one,
   // but you can also remove it
