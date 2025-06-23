@@ -15,32 +15,26 @@
             : 'bg-light text-grey-10'
       "
     >
-      <q-toolbar class="row justify-between">
-        <q-toolbar-title class="font-lexend" :style="`color: ${corDestaque}`">
-          Money Ctrl
-        </q-toolbar-title>
+      <q-toolbar class="row">
         <q-btn
           dense
           round
           flat
-          icon="sym_o_settings"
+          icon="sym_o_arrow_back"
           :style="`color: ${corDestaque}`"
-          @click="router.push({ name: 'settings' })"
+          @click="router.go(-1)"
         >
           <q-tooltip>Settings</q-tooltip>
         </q-btn>
+        <q-toolbar-title class="font-lexend" :style="`color: ${corDestaque}`">
+          Configurações
+        </q-toolbar-title>
       </q-toolbar>
     </q-header>
     <q-page-container>
       <div class="row">
-        <tabsComponent
-          v-if="q.screen.gt.sm"
-          :vertical="true"
-          :tabs="tabs"
-          :dark="true"
-          :tab="tab"
-        />
-        <q-scroll-area
+        <configNav/>
+                <q-scroll-area
           :style="
             q.screen.lt.md
               ? 'height: calc(100vh - 107px)'
@@ -59,13 +53,6 @@
             <router-view class="full-width" />
           </transition>
         </q-scroll-area>
-        <tabsComponent
-          class="col-12"
-          v-if="q.screen.lt.md"
-          :tabs="tabs"
-          :dark="true"
-          :tab="tab"
-        />
       </div>
     </q-page-container>
   </q-layout>
@@ -74,12 +61,12 @@
 <script setup>
 import { LocalStorage, useQuasar } from "quasar";
 import { computed, ref } from "vue";
-import tabsComponent from "src/components/tabsComponent.vue";
 import { useRoute, useRouter } from "vue-router";
+import configNav from "src/components/configNav.vue";
 
 const q = useQuasar();
-const router = useRouter();
 const route = useRoute();
+const router = useRouter();
 
 if (!LocalStorage.getItem("configuracoes"))
   LocalStorage.setItem("configuracoes", {
@@ -100,7 +87,7 @@ const corDestaque = ref(
 );
 
 const tab = computed(() => route.name);
-const tabs = [
+const configs = [
   {
     name: "home",
     icon: "sym_o_home",
