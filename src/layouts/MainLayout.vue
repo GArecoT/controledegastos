@@ -72,32 +72,20 @@
 </template>
 
 <script setup>
-import { LocalStorage, useQuasar } from "quasar";
+import { useQuasar } from "quasar";
 import { computed, ref } from "vue";
 import tabsComponent from "src/components/tabsComponent.vue";
 import { useRoute, useRouter } from "vue-router";
+import { setTemaPadraoeRetorna } from "src/composables/theme/theme";
 
 const q = useQuasar();
 const router = useRouter();
 const route = useRoute();
 
-if (!LocalStorage.getItem("configuracoes"))
-  LocalStorage.setItem("configuracoes", {
-    dark: true,
-    corDestaque: "#1976d2",
-    diaFechamento: "30",
-  });
+const darkTheme = ref("");
+const corDestaque = ref("");
 
-const darkTheme = ref(
-  LocalStorage.hasItem("configuracoes") &&
-    LocalStorage.getItem("configuracoes")?.dark
-    ? true
-    : false,
-);
-const corDestaque = ref(
-  LocalStorage.hasItem("configuracoes") &&
-    LocalStorage.getItem("configuracoes")?.corDestaque,
-);
+[darkTheme.value, corDestaque.value] = setTemaPadraoeRetorna();
 
 const tab = computed(() => route.name);
 const tabs = [

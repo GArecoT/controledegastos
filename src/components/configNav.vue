@@ -26,21 +26,15 @@
   </div>
 </template>
 <script setup>
-import { LocalStorage } from "quasar";
+import { pegaTema } from "src/composables/theme/theme";
 import { ref } from "vue";
 
 const opcoes = [{ nome: "Geral", icone: "sym_o_settings" }];
 const opcao_selecionada = ref("");
 
-const darkTheme = ref(
-  LocalStorage.hasItem("configuracoes") &&
-    LocalStorage.getItem("configuracoes")?.dark
-    ? true
-    : false,
-);
-const corDestaque = ref(
-  LocalStorage.hasItem("configuracoes") &&
-    LocalStorage.getItem("configuracoes")?.corDestaque,
-);
+const darkTheme = ref("");
+const corDestaque = ref("");
+
+[darkTheme.value, corDestaque.value] = pegaTema();
 </script>
 <style lang="scss"></style>
