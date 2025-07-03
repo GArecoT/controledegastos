@@ -23,7 +23,12 @@ const routes = [
       {
         path: "",
         name: "settingsHome",
-        component: () => import("pages/IndexPage.vue"),
+        component: () => import("components/configComponent.vue"),
+      },
+      {
+        path: "geral",
+        name: "settingsGeral",
+        component: () => import("pages/settings/geralPage.vue"),
       },
     ],
   },

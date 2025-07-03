@@ -5,6 +5,13 @@
   >
     <q-header
       flat
+      v-if="
+        !(
+          q.screen.lt.md &&
+          route.fullPath.split('/').length > 2 &&
+          route.fullPath.split('/')[2]?.length > 0
+        )
+      "
       :class="
         q.screen.gt.md
           ? darkTheme
@@ -22,7 +29,7 @@
           flat
           icon="sym_o_arrow_back"
           :style="`color: ${corDestaque}`"
-          @click="router.go(-1)"
+          @click="router.push('/')"
         >
           <q-tooltip>Settings</q-tooltip>
         </q-btn>
@@ -32,9 +39,10 @@
       </q-toolbar>
     </q-header>
     <q-page-container>
-      <div class="row">
-        <configNav class="col-xs-12 col-md-3" />
+      <div class="row" v-if="q.screen.gt.sm">
+        <configNav class="col-xs-12 col-md-3" @clicou="openDialog = true" />
         <q-scroll-area
+          v-if="q.screen.gt.sm"
           :style="
             q.screen.lt.md
               ? 'height: calc(100vh - 107px)'
@@ -42,53 +50,77 @@
           "
           class="col-xs-12 col-md"
         >
-          <transition
-            appear
-            :enter-active-class="
-              q.screen.lt.md
-                ? 'animated fadeInUp faster'
-                : 'animated fadeIn faster'
+          <router-view
+            v-slot="{ Component }"
+            class="full-width"
+            :class="
+              darkTheme
+                ? 'bg-dark-gray text-grey-1'
+                : 'bg-light-gray text-grey-10'
             "
           >
-            <router-view class="full-width" />
-          </transition>
+            <transition
+              appear
+              :enter-active-class="
+                q.screen.lt.md
+                  ? 'animated fadeInUp faster'
+                  : 'animated fadeIn faster'
+              "
+            >
+              <component :is="Component" />
+            </transition>
+          </router-view>
         </q-scroll-area>
+      </div>
+      <div v-else>
+        <configNav
+          class="full-width"
+          v-if="
+            route.fullPath.split('/').length < 3 ||
+            !(route.fullPath.split('/')[2]?.length > 0)
+          "
+          @clicou="openDialog = true"
+        />
+        <q-card v-else>
+          <router-view
+            v-slot="{ Component }"
+            class="full-width"
+            :class="
+              darkTheme
+                ? 'bg-dark-gray text-grey-1'
+                : 'bg-light-gray text-grey-10'
+            "
+          >
+            <transition
+              appear
+              :enter-active-class="
+                q.screen.lt.md
+                  ? 'animated slideInRight'
+                  : 'animated slideOutLeft'
+              "
+            >
+              <component :is="Component" />
+            </transition>
+          </router-view>
+        </q-card>
       </div>
     </q-page-container>
   </q-layout>
 </template>
 
 <script setup>
-import { LocalStorage, useQuasar } from "quasar";
-import { computed, ref } from "vue";
+import { useQuasar } from "quasar";
+import { ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import configNav from "src/components/configNav.vue";
 import { setTemaPadraoeRetorna } from "src/composables/theme/theme";
 
 const q = useQuasar();
-const route = useRoute();
 const router = useRouter();
+const route = useRoute();
+const openDialog = ref(false);
 const darkTheme = ref("");
 const corDestaque = ref("");
 
 [darkTheme.value, corDestaque.value] = setTemaPadraoeRetorna();
-
-const tab = computed(() => route.name);
-const configs = [
-  {
-    name: "home",
-    icon: "sym_o_home",
-    label: "Home",
-  },
-  {
-    name: "categories",
-    icon: "sym_o_category",
-    label: "Categories",
-  },
-  {
-    name: "payment",
-    icon: "sym_o_money",
-    label: "Payment",
-  },
-];
 </script>
