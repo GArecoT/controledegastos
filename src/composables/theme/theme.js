@@ -10,6 +10,22 @@ export function setTemaPadrao() {
   }
 }
 
+export function setTema(dark, corDestaque) {
+  console.log(dark, corDestaque);
+  if (dark != undefined) {
+    LocalStorage.setItem("configuracoes", {
+      ...LocalStorage.getItem("configuracoes"),
+      dark: dark,
+    });
+  }
+  if (corDestaque) {
+    LocalStorage.setItem("configuracoes", {
+      ...LocalStorage.getItem("configuracoes"),
+      corDestaque: corDestaque,
+    });
+  }
+}
+
 export function pegaTema() {
   const darkTheme = LocalStorage.hasItem("configuracoes") &&
     LocalStorage.getItem("configuracoes")?.dark
