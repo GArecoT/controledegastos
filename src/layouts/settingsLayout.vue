@@ -33,8 +33,8 @@
     </q-header>
     <q-page-container>
       <div class="row">
-        <configNav/>
-                <q-scroll-area
+        <configNav class="col-xs-12 col-md-3" />
+        <q-scroll-area
           :style="
             q.screen.lt.md
               ? 'height: calc(100vh - 107px)'
