@@ -37,7 +37,7 @@
           v-if="q.screen.gt.sm"
           :vertical="true"
           :tabs="tabs"
-          :dark="true"
+          :dark="darkTheme"
           :tab="tab"
         />
         <q-scroll-area
@@ -63,7 +63,7 @@
           class="col-12"
           v-if="q.screen.lt.md"
           :tabs="tabs"
-          :dark="true"
+          :dark="darkTheme"
           :tab="tab"
         />
       </div>
