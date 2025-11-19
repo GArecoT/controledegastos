@@ -1,0 +1,5 @@
+[
+  { "nome": "Crédito", "id": "0", "icone": "sym_o_credit_card" },
+  { "nome": "Débito", "id": "1", "icone": "sym_o_payments" },
+  { "nome": "Pix", "id": "2", "icone": "pix" }
+]

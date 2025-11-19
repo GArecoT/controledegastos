@@ -1,7 +1,6 @@
 <template>
   <div class="q-pa-sm">
     <q-list
-      bordered
       padding
       class="rounded-borders"
       :class="

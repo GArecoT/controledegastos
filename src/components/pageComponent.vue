@@ -1,7 +1,7 @@
 <template>
   <q-page class="flex justify-center q-pa-sm">
-    <div class="full-width">
-      <div class="row items-center content-center" v-if="props.voltar">
+    <div class="full-width" v-if="props.voltar">
+      <div class="row items-center content-center">
         <q-btn
           icon="sym_o_arrow_back"
           flat

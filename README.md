@@ -2,6 +2,14 @@
 
 Controle de gastos feito em Quasar
 
+## Pagamentos
+
+### Tipos pagamentos
+
+- Cartão Crédito
+- Débito
+- Pix
+
 ## Install the dependencies
 ```bash
 yarn

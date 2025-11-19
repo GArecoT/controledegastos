@@ -13,6 +13,11 @@ const routes = [
         name: "categories",
         component: () => import("pages/categoriesPage.vue"),
       },
+{
+        path: "payment",
+        name: "payment",
+        component: () => import("pages/paymentPage.vue"),
+      },
     ],
   },
   {
