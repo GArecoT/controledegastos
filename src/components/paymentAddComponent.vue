@@ -61,19 +61,18 @@
   </q-card>
 </template>
 <script setup>
-import { setTemaPadraoeRetorna } from "src/composables/theme/theme";
-import { onMounted, ref } from "vue";
+import { computed, onMounted, ref } from "vue";
 import tipos_pagamento from "src/composables/database/constantes/tipos_pagamento.json";
 import verificadores from "src/composables/verificadores";
+import { useConfigStore } from "src/stores/stConfig/stConfig";
 
 const props = defineProps({
   id: { type: String, required: false },
 });
 const emit = defineEmits(["fechar"]);
+const storeConfig = useConfigStore();
 
-const darkTheme = ref("");
-const corDestaque = ref("");
-[darkTheme.value, corDestaque.value] = setTemaPadraoeRetorna();
+const darkTheme = computed(() => storeConfig.getConfig.darkMode);
 
 const pagamento = ref({
   nome: "",

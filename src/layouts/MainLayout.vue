@@ -16,7 +16,7 @@
       "
     >
       <q-toolbar class="row justify-between">
-        <q-toolbar-title class="font-lexend" :style="`color: ${corDestaque}`">
+        <q-toolbar-title class="font-lexend" :class="`text-${corDestaque}`">
           Money Ctrl
         </q-toolbar-title>
         <q-btn
@@ -24,7 +24,7 @@
           round
           flat
           icon="sym_o_settings"
-          :style="`color: ${corDestaque}`"
+          :color="corDestaque"
           @click="router.push({ name: 'settings' })"
         >
           <q-tooltip>Settings</q-tooltip>
@@ -73,19 +73,18 @@
 
 <script setup>
 import { useQuasar } from "quasar";
-import { computed, ref } from "vue";
+import { computed } from "vue";
 import tabsComponent from "src/components/tabsComponent.vue";
 import { useRoute, useRouter } from "vue-router";
-import { setTemaPadraoeRetorna } from "src/composables/theme/theme";
+import { useConfigStore } from "src/stores/stConfig/stConfig";
 
 const q = useQuasar();
 const router = useRouter();
 const route = useRoute();
+const storeConfig = useConfigStore();
 
-const darkTheme = ref("");
-const corDestaque = ref("");
-
-[darkTheme.value, corDestaque.value] = setTemaPadraoeRetorna();
+const darkTheme = computed(() => storeConfig.getConfig.darkMode);
+const corDestaque = computed(() => storeConfig.getCorDestaque);
 
 const tab = computed(() => route.name);
 const tabs = [

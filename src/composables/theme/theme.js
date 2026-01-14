@@ -11,7 +11,6 @@ export function setTemaPadrao() {
 }
 
 export function setTema(dark, corDestaque) {
-  console.log(dark, corDestaque);
   if (dark != undefined) {
     LocalStorage.setItem("configuracoes", {
       ...LocalStorage.getItem("configuracoes"),

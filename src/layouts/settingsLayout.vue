@@ -28,12 +28,12 @@
           round
           flat
           icon="sym_o_arrow_back"
-          :style="`color: ${corDestaque}`"
+          :color="corDestaque"
           @click="router.push('/')"
         >
           <q-tooltip>Settings</q-tooltip>
         </q-btn>
-        <q-toolbar-title class="font-lexend" :style="`color: ${corDestaque}`">
+        <q-toolbar-title class="font-lexend" :class="`text-${corDestaque}`">
           Configurações
         </q-toolbar-title>
       </q-toolbar>
@@ -110,17 +110,18 @@
 
 <script setup>
 import { useQuasar } from "quasar";
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import configNav from "src/components/configNav.vue";
-import { setTemaPadraoeRetorna } from "src/composables/theme/theme";
+import { useConfigStore } from "src/stores/stConfig/stConfig";
 
 const q = useQuasar();
 const router = useRouter();
 const route = useRoute();
-const openDialog = ref(false);
-const darkTheme = ref("");
-const corDestaque = ref("");
 
-[darkTheme.value, corDestaque.value] = setTemaPadraoeRetorna();
+const storeConfig = useConfigStore();
+
+const openDialog = ref(false);
+const darkTheme = computed(() => storeConfig.getConfig.darkMode);
+const corDestaque = computed(() => storeConfig.getCorDestaque);
 </script>

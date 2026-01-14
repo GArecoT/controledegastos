@@ -16,7 +16,7 @@
       <q-btn
         fab
         icon="sym_o_add"
-        :style="`background-color: ${corDestaque}`"
+        :color="corDestaque"
         :class="darkTheme ? 'text-dark' : 'text-white'"
         @click="dialogAdicionar = true"
       />
@@ -28,13 +28,14 @@
 </template>
 <script setup>
 import pageComponent from "src/components/pageComponent.vue";
-import { setTemaPadraoeRetorna } from "src/composables/theme/theme";
 import paymentAddComponent from "src/components/paymentAddComponent.vue";
-import { ref } from "vue";
+import { computed, ref } from "vue";
+import { useConfigStore } from "src/stores/stConfig/stConfig";
 
-const darkTheme = ref("");
-const corDestaque = ref("");
-[darkTheme.value, corDestaque.value] = setTemaPadraoeRetorna();
+const storeConfig = useConfigStore();
+
+const darkTheme = computed(() => storeConfig.getConfig.darkMode);
+const corDestaque = computed(() => storeConfig.getCorDestaque);
 const dialogAdicionar = ref(false);
 
 const idSelecionado = ref("");

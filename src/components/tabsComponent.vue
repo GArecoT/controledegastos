@@ -3,13 +3,13 @@
     v-model="lclTab"
     :vertical="props.vertical"
     class="items-center content-center"
-    :class="props.dark ? 'bg-dark-gray' : 'bg-light-gray'"
-    :style="`color: ${props.corDestaque}; ${
+    :class="`${storeConfig.getConfig.darkMode ? 'bg-dark-gray' : 'bg-light-gray'} text-${storeConfig.getCorDestaque}`"
+    :style="`${
       props.vertical
         ? 'height: calc(100vh - 50px); border-radius: 0px 5px 5px 0px'
         : ' border-radius: 5px 0px 0px 5px'
     }`"
-    :indicator-color="props.dark ? 'dark' : 'light'"
+    :indicator-color="storeConfig.getConfig.darkMode ? 'dark' : 'light'"
   >
     <q-tab
       :name="tab.name"
@@ -21,7 +21,7 @@
         :name="tab.icon"
         size="xs"
         :class="
-          props.dark
+          storeConfig.getConfig.darkMode
             ? lclTab == tab.name
               ? 'selected-icon-dark'
               : 'unselected-icon'
@@ -35,23 +35,17 @@
   </q-tabs>
 </template>
 <script setup>
+import { useConfigStore } from "src/stores/stConfig/stConfig";
 import { ref, watch } from "vue";
 import { useRouter } from "vue-router";
 
 const router = useRouter();
+const storeConfig = useConfigStore();
 
 const props = defineProps({
   vertical: {
     type: Boolean,
     default: false,
-  },
-  dark: {
-    type: Boolean,
-    default: false,
-  },
-  corDestaque: {
-    type: String,
-    default: "#1976d2",
   },
   tabs: {
     type: Array,

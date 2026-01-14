@@ -20,7 +20,8 @@
             emit('clicou');
           }
         "
-        :active-style="`color: ${corDestaque}; ${darkTheme ? 'text-grey-1 bg-dark-gray' : 'text-grey-10 bg-light-gray'}`"
+        :active-style="`${darkTheme ? 'text-grey-1 bg-dark-gray' : 'text-grey-10 bg-light-gray'}`"
+        :active-class="`text-${storeConfig.getCorDestaque}`"
       >
         <q-item-section avatar>
           <q-icon :name="opcao.icone" />
@@ -32,21 +33,20 @@
   </div>
 </template>
 <script setup>
-import { pegaTema } from "src/composables/theme/theme";
-import { onMounted, ref } from "vue";
+import { useConfigStore } from "src/stores/stConfig/stConfig";
+import { computed, onMounted, ref } from "vue";
 import { useRoute } from "vue-router";
+
+const storeConfig = useConfigStore();
 
 const opcoes = [
   { nome: "Geral", icone: "sym_o_settings", link: "/settings/geral" },
 ];
 const opcao_selecionada = ref("");
-const darkTheme = ref("");
-const corDestaque = ref("");
+const darkTheme = computed(() => storeConfig.getConfig.darkMode);
 const route = useRoute();
 
 const emit = defineEmits(["clicou"]);
-
-[darkTheme.value, corDestaque.value] = pegaTema();
 
 onMounted(() => {
   const rota = route.fullPath;
