@@ -51,10 +51,11 @@
           dense
           v-close-popup
           :disable="!(pagamento.id > 0)"
+          no-caps
         />
         <div class="row q-gutter-x-sm">
-          <q-btn label="Cancelar" flat color="red-5" dense v-close-popup />
-          <q-btn label="Salvar" unelevated color="primary" type="submit" />
+          <q-btn label="Cancelar" flat color="red-5" dense no-caps v-close-popup />
+          <q-btn label="Salvar" unelevated :color="storeConfig.getCorDestaque" no-caps type="submit" />
         </div>
       </q-card-section>
     </q-form>
@@ -73,7 +74,6 @@ const emit = defineEmits(["fechar"]);
 const storeConfig = useConfigStore();
 
 const darkTheme = computed(() => storeConfig.getConfig.darkMode);
-
 const pagamento = ref({
   nome: "",
   tipo: "0",

@@ -18,10 +18,11 @@
             map-options
             emit-value
             @update:model-value="handleMudancaMes"
+            :color="corDestaque"
           />
           <div class="row">
             <!-- TODO: FAZER OS BOTÕES FUNCIONAIS -->
-            <q-btn dense icon="arrow_left" flat color="primary" />
+            <q-btn dense icon="arrow_left" flat :color="corDestaque" />
             <q-input
               label="Year"
               style="width: 70px"
@@ -31,8 +32,9 @@
               map-options
               emit-value
               @update:model-value="handleMudancaMes"
+              :color="corDestaque"
             />
-            <q-btn dense icon="arrow_right" flat color="primary" />
+            <q-btn dense icon="arrow_right" flat :color="corDestaque" />
           </div>
         </div>
 
@@ -42,7 +44,11 @@
             :class="darkTheme ? 'bg-dark-gray' : 'bg-light-gray'"
             style="height: fit-content"
           >
-            <p style="font-size: 0.8rem" class="q-mb-xs text-primary">
+            <p
+              style="font-size: 0.8rem"
+              class="q-mb-xs"
+              :class="`text-${corDestaque}`"
+            >
               <q-icon name="sym_o_currency_exchange" class="q-mr-sm" />Dívidas
               Recorrentes
             </p>
@@ -55,7 +61,8 @@
           >
             <p
               style="font-size: 0.8rem"
-              class="q-mb-xs text-primary text-right"
+              class="q-mb-xs text-right"
+              :class="`text-${corDestaque}`"
             >
               Total
             </p>
