@@ -41,6 +41,7 @@ const storeConfig = useConfigStore();
 
 const opcoes = [
   { nome: "Geral", icone: "sym_o_settings", link: "/settings/geral" },
+  { nome: "Servidor", icone: "sym_o_dns", link: "/settings/servidor" },
 ];
 const opcao_selecionada = ref("");
 const darkTheme = computed(() => storeConfig.getConfig.darkMode);

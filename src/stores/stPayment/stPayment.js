@@ -1,16 +1,21 @@
 import { defineStore } from "pinia";
 import { LocalStorage } from "quasar";
+import request from "src/composables/server/request";
+
+const storeConfig = useConfigStore()
 
 const configPadrao = {
-  darkMode: false,
-  corDestaque: 'indigo',
-  modoServidor: false,
-  salvarDiretoServidor: false,
-  enderecoServidor: ""
 }
 
-function pegaConfig() {
-  if (LocalStorage.hasItem('config')) return LocalStorage.getItem('config'); else return configPadrao
+async function handleRequest(servico, payload) {
+  let ret = {}
+  if (storeConfig.getConfig.salvarDiretoServidor && storeConfig.getConfig.modoServidor) {
+    ret = await request(servico, payload)
+  } else {
+
+  }
+
+  return ret
 }
 
 export const useConfigStore = defineStore("contexto", {

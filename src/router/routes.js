@@ -35,6 +35,11 @@ const routes = [
         name: "settingsGeral",
         component: () => import("pages/settings/geralPage.vue"),
       },
+      {
+        path: "servidor",
+        name: "settingsServidor",
+        component: () => import("pages/settings/servidorPage.vue"),
+      },
     ],
   },
 

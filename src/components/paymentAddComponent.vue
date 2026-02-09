@@ -54,8 +54,21 @@
           no-caps
         />
         <div class="row q-gutter-x-sm">
-          <q-btn label="Cancelar" flat color="red-5" dense no-caps v-close-popup />
-          <q-btn label="Salvar" unelevated :color="storeConfig.getCorDestaque" no-caps type="submit" />
+          <q-btn
+            label="Cancelar"
+            flat
+            color="red-5"
+            dense
+            no-caps
+            v-close-popup
+          />
+          <q-btn
+            label="Salvar"
+            unelevated
+            :color="storeConfig.getCorDestaque"
+            no-caps
+            type="submit"
+          />
         </div>
       </q-card-section>
     </q-form>
@@ -66,6 +79,7 @@ import { computed, onMounted, ref } from "vue";
 import tipos_pagamento from "src/composables/database/constantes/tipos_pagamento.json";
 import verificadores from "src/composables/verificadores";
 import { useConfigStore } from "src/stores/stConfig/stConfig";
+import { adicionaBD } from "src/composables/database/database";
 
 const props = defineProps({
   id: { type: String, required: false },
@@ -85,6 +99,7 @@ async function salvar() {
   //formata valor
   //enviar para bd
   //fehcar se sucesso
+  console.log(adicionaBD("FormasPagamento", { nome: "AAA", type: 3, limit: 12.0 }))
   emit("fechar");
 }
 
